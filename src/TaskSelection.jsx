@@ -1,57 +1,25 @@
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import { Roster } from "./Roster";
-import { Calendar } from "./Calendar";
-import { Trades } from "./Trades";
+import { Tabs, Tab, Paper } from "@mui/material";
 import { useState } from "react";
-
-function TabPanel(props) {
-	const { children, value, index, opponents, ...other } = props;
-
-	return (
-		<div
-			role="tabpanel"
-			hidden={value !== index}
-			id={`simple-tabpanel-${index}`}
-			aria-labelledby={`simple-tab-${index}`}
-			{...other}
-		>
-			{value === index && (
-				<Box sx={{ p: 3 }}>
-					<Typography component="span">{children}</Typography>
-				</Box>
-			)}
-		</div>
-	);
-}
+import { useNavigate, useLocation } from "react-router-dom";
 
 export function TaskSelection(props) {
 	const [value, setValue] = useState(0);
-
-	const handleChange = (evt, newValue) => {
-		setValue(newValue);
-	};
+	const navigate = useNavigate();
+	const location = useLocation();
 
 	return (
-		<Box sx={{ width: "100%" }}>
-			<Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-				<Tabs value={value} onChange={handleChange}>
-					<Tab label="Calander" />
-					<Tab label="Roster" />
-					<Tab label="Trades" />
-				</Tabs>
-			</Box>
-			<TabPanel value={value} index={0}>
-				<Calendar />
-			</TabPanel>
-			<TabPanel value={value} index={1}>
-				<Roster />
-			</TabPanel>
-			<TabPanel value={value} index={2}>
-				<Trades />
-			</TabPanel>
-		</Box>
+		<Tabs
+			value={location.pathname === "/" ? "/calander" : location.pathname}
+			onChange={e => setValue(e.target.value)}
+			component={Paper}
+		>
+			<Tab
+				value="/calander"
+				label="Calander"
+				onClick={() => navigate("/calander")}
+			/>
+			<Tab value="/roster" label="Roster" onClick={() => navigate("/roster")} />
+			<Tab value="/trades" label="Trades" onClick={() => navigate("/trades")} />
+		</Tabs>
 	);
 }
