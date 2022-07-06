@@ -24,7 +24,7 @@ export function Roster() {
 	}, []);
 
 	return (
-		<TableContainer component={Paper} sx={{ m: 2 }}>
+		<TableContainer component={Paper} sx={{ p: 2 }}>
 			<Table stickyHeader sx={{ minWidth: 800 }}>
 				<TableHead>
 					<TableRow>

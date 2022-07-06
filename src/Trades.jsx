@@ -2,7 +2,6 @@ import { Button, Grid, MenuItem, Paper, Stack, Select } from "@mui/material";
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { LineAxisOutlined } from "@mui/icons-material";
 
 export function Trades() {
 	const [teamAssets, setTeamAssets] = useState([]);
@@ -44,13 +43,12 @@ export function Trades() {
 		<Grid
 			container
 			component={Paper}
-			spacing={2}
-			sx={{ p: 1 }}
 			alignItems="center"
 			justifyContent={"center"}
+			sx={{ m: 2, p: 2 }}
 		>
 			<Grid item xs={3.5}>
-				<Stack spacing={1}>
+				<Stack>
 					{teamAssets.map(asset => {
 						return (
 							<Button
@@ -69,7 +67,7 @@ export function Trades() {
 				</Stack>
 			</Grid>
 			<Grid item xs={2}>
-				<Stack spacing={1}>
+				<Stack>
 					{selectedAssets.map(asset => {
 						return (
 							<Button
@@ -94,13 +92,15 @@ export function Trades() {
 							selectedAssets,
 							selectedOppAssets,
 						});
+						setSelectedAssets([]);
+						setSelectedOppAssets([]);
 					}}
 				>
 					<CompareArrowsIcon />
 				</Button>
 			</Grid>
 			<Grid item xs={2}>
-				<Stack spacing={1}>
+				<Stack>
 					{selectedOppAssets.map(asset => {
 						return (
 							<Button
@@ -116,7 +116,7 @@ export function Trades() {
 				</Stack>
 			</Grid>
 			<Grid item xs={3.5}>
-				<Stack spacing={1}>
+				<Stack>
 					<Select value={selectedTeam} onChange={handleChangeTeam}>
 						<MenuItem value="nets">Nets</MenuItem>
 						<MenuItem value="bucks">Bucks</MenuItem>
